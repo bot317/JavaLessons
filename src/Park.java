@@ -2,17 +2,18 @@ public class Park {
 
     //Создать класс Park с внутренним классом,
     // с помощью объектов которого можно хранить информацию об аттракционах, времени их работы и стоимости.
-    public class Attraction{
+    public class Attraction {
         public String name;
-        public  String workingHours;
+        public String workingHours;
         public int price;
 
-        public Attraction (String name, String workingHours, int price){
+        public Attraction(String name, String workingHours, int price) {
             this.name = name;
             this.workingHours = workingHours;
             this.price = price;
         }
-        public Attraction (){
+
+        public Attraction() {
             this.name = "Empty";
             this.workingHours = "Empty";
             this.price = 0;
