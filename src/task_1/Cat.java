@@ -1,3 +1,7 @@
+package task_1;
+
+import task_1.Animal;
+
 public class Cat extends Animal {
     private static int count = 0;
     private boolean satiety = false;

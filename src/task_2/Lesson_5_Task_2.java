@@ -1,3 +1,5 @@
+package task_2;
+
 public class Lesson_5_Task_2 {
     public static void main(String[] args) {
         Calculate[] figures = new Calculate[]{

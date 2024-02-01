@@ -1,3 +1,5 @@
+package task_1;
+
 public class Animal {
     private static int count = 0;
     public String name;

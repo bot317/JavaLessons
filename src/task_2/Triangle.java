@@ -1,3 +1,5 @@
+package task_2;
+
 public class Triangle implements Calculate {
     private double sideA;
     private double sideB;

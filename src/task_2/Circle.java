@@ -1,24 +1,24 @@
-public class Rectangle implements Calculate {
-    private double width;
-    private double height;
+package task_2;
+
+public class Circle implements Calculate {
+    private double radius;
     private String fillColor;
     private String borderColor;
 
-    public Rectangle(double width, double height, String fillColor, String borderColor) {
-        this.width = width;
-        this.height = height;
+    public Circle(double radius, String fillColor, String borderColor) {
+        this.radius = radius;
         this.fillColor = fillColor;
         this.borderColor = borderColor;
     }
 
     @Override
     public double getPerimeter() {
-        return 2 * (width + height);
+        return 2 * Math.PI * radius;
     }
 
     @Override
     public double getArea() {
-        return width * height;
+        return Math.PI * radius * radius;
     }
 
     @Override
@@ -31,4 +31,3 @@ public class Rectangle implements Calculate {
         return borderColor;
     }
 }
-

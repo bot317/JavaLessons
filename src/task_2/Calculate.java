@@ -1,3 +1,5 @@
+package task_2;
+
 public interface Calculate {
     double getPerimeter();
     double getArea();
