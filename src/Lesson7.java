@@ -27,7 +27,6 @@ public class Lesson7 {
                 {"1", "2", "3", "4"}
         };
 
-
         try {
             int result = sumArrayElements(trueArray);
             System.out.println("Сумма элементов массива: " + result);
@@ -43,12 +42,12 @@ public class Lesson7 {
     public static int sumArrayElements(String[][] df) throws MyArraySizeException, MyArrayDataException {
         int rows = df.length;
         int columns = df[0].length;
+        int sum = 0;
 
         if (rows != 4 || columns != 4) {
             throw new MyArraySizeException();
         }
 
-        int sum = 0;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 try {
@@ -59,7 +58,6 @@ public class Lesson7 {
                 }
             }
         }
-
         return sum;
     }
 }
@@ -70,11 +68,13 @@ class MyArraySizeException extends Exception {
 }
 
 class MyArrayDataException extends Exception {
-    private int [] errorAddress = new int [2];
-    public MyArrayDataException (int row, int column) {
+    private int[] errorAddress = new int[2];
+
+    public MyArrayDataException(int row, int column) {
         errorAddress[0] = row;
         errorAddress[1] = column;
     }
+
     public int[] getErrorAddress() {
         return errorAddress;
     }
