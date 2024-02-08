@@ -16,6 +16,8 @@ public class Lesson8 {
 
         // Посчитать, сколько раз встречается каждое слово. (реализовать с использованием коллекций)
         // (Не понял, как именно требуют по заданию, поэтому сделал два варианта)
+
+        //Первый способ
         Map<String, Integer> wordCount = new HashMap<>();
         for (String word : wordsArray) {
             if (wordCount.containsKey(word)) {
@@ -25,18 +27,19 @@ public class Lesson8 {
             }
         }
 
+        //Второй способ
         ArrayList dictKey = new ArrayList<>(uniqueWords);
         int[] dictMean = new int[dictKey.size()];
         for (String word : wordsArray) {
             dictMean[dictKey.indexOf(word)] += 1;
         }
 
-        System.out.println("Количество вхождений каждого слова первым методом:");
+        System.out.println("Количество вхождений каждого слова (первый способ):");
         for (Map.Entry<String, Integer> entry : wordCount.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
 
-        System.out.println("Количество вхождений каждого слова вторым методом:");
+        System.out.println("Количество вхождений каждого слова (второй способ):");
         for (int i = 0; i < dictKey.size(); i++) {
             System.out.println(dictKey.get(i) + ": " + dictMean[i]);
         }
