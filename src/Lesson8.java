@@ -50,8 +50,14 @@ public class Lesson8 {
         phoneBook.add("Петров", "81111111111");
         phoneBook.add("Сидоров", "66666666666");
         phoneBook.add("Иванов", "77777777777");
+        try {
+            phoneBook.add("Кабанов", "77777777777");
+        } catch (ArrayStoreException e) {
+            System.out.println(e);
+        }
         System.out.println("Номера телефона по фамилии Сидоров: " + phoneBook.get("Сидоров"));
         System.out.println("Номера телефона по фамилии Иванов: " + phoneBook.get("Иванов"));
+        System.out.println("Номера телефона по фамилии Кабанов: " + phoneBook.get("Кабанов"));
     }
 }
 
@@ -59,20 +65,4 @@ public class Lesson8 {
 // В этот телефонный справочник с помощью метода add() можно добавлять записи, а с помощью метода get() искать номер телефона по фамилии.
 // Следует учесть, что под одной фамилией может быть несколько телефонов (в случае однофамильцев),
 // тогда при запросе такой фамилии должны выводиться все телефоны.
-class PhoneBook {
-    private Map<String, List<String>> phoneBook = new HashMap<>();
 
-    public void add(String lastName, String phoneNumber) {
-        if (phoneBook.containsKey(lastName)) {
-            phoneBook.get(lastName).add(phoneNumber);
-        } else {
-            List<String> phoneNumbers = new ArrayList<>();
-            phoneNumbers.add(phoneNumber);
-            phoneBook.put(lastName, phoneNumbers);
-        }
-    }
-
-    public List<String> get(String lastName) {
-        return phoneBook.getOrDefault(lastName, new ArrayList<>());
-    }
-}
