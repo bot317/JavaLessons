@@ -43,7 +43,7 @@ public class ChromeTest {
 
     @AfterEach
     void teardown() {
-        driver.quit();
+       driver.quit();
     }
 
     @Test
@@ -73,19 +73,28 @@ public class ChromeTest {
 
     @Test
     public void testPay() {
-
-        // Заполнить поля и проверить работу кнопки «Продолжить» (проверяем только вариант «Услуги связи», номер для теста 297777777)
+        // Для варианта «Услуги связи» заполнить поля в соответствии с пререквизитами из предыдущей темы, нажать кнопку «Продолжить»
+        String phoneNumber = "297777777";
+        String money = "200";
         driver.findElement(By.xpath("//div[@class='pay__forms']//input[contains(@class, 'phone')]"))
-                .sendKeys("297777777");
+                .sendKeys(phoneNumber);
         driver.findElement(By.xpath("//div[@class='pay__forms']//input[contains(@class, 'total_rub')]"))
-                .sendKeys("200");
+                .sendKeys(money);
         driver.findElement(By.xpath("//div[@class='pay__forms']//input[contains(@class, 'email')]"))
                 .sendKeys("mail@yandex.ru");
 
         WebElement continueButton = driver.findElement(By.xpath("//div[@class='pay__forms']//button[contains(@class, 'button__default')]"));
         continueButton.click();
+        // и в появившемся окне проверить корректность отображения суммы (в том числе на кнопке),
         WebElement iframe = driver.findElement(By.xpath("//*[contains(@class, 'bepaid-iframe')]"));
         driver.switchTo().frame(iframe);
+        WebElement titlePay = driver.findElement(By.xpath("//div[@class = 'header__payment-amount']/span"));
+        System.out.println(titlePay.getText());
+        assertTrue(titlePay.getText().contains("200.00 BYN"));
+        // номера телефона,
+        // а также надписей в незаполненных полях для ввода реквизитов карты,
+        // наличие иконок платёжных систем.
+
         WebElement nextElement = driver.findElement(By.xpath("//*[contains(@class, 'app-wrapper__content')]"));
         assertTrue(nextElement.isEnabled());
 
