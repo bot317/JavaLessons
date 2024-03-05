@@ -96,11 +96,15 @@ public class ChromeTest {
         WebElement iframe = driver.findElement(By.xpath("//*[contains(@class, 'bepaid-iframe')]"));
         driver.switchTo().frame(iframe);
 
-        WebElement paymentAmount = driver.findElement(By.xpath("//div[@class='header__payment-amount']/span"));
+        WebElement paymentAmount = driver.findElement(By.xpath("//div[@class='header__payment-amount']/span[1]"));
         String text = paymentAmount.getText();
+        //assertTrue(paymentAmountElement.getText().contains("200"));
+        WebElement paymentAmountButton = driver.findElement(By.xpath("//div[@class='header__payment-amount']/span[1]"));
+        System.out.println(paymentAmountButton.getText());
+        /html/body/app-root/div/div/app-payment-container/section/app-card-page/div/div[1]/button
 
         System.out.println("Текст в элементе: " + text);
-        //assertTrue(paymentAmountElement.getText().contains("200"));
+
         // номера телефона,
         // а также надписей в незаполненных полях для ввода реквизитов карты,
         // наличие иконок платёжных систем.
