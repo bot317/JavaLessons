@@ -9,13 +9,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
+import static java.time.Duration.ofSeconds;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
@@ -79,7 +82,8 @@ public class ChromeTest {
 
 
     @Test
-    public void testPay() {
+
+    public void testPay() throws InterruptedException {
         // Для варианта «Услуги связи» заполнить поля в соответствии с пререквизитами из предыдущей темы, нажать кнопку «Продолжить»
         String phoneNumber = "297777777";
         String money = "200";
@@ -92,22 +96,33 @@ public class ChromeTest {
 
         WebElement continueButton = driver.findElement(By.xpath("//div[@class='pay__forms']//button[contains(@class, 'button__default')]"));
         continueButton.click();
-        // и в появившемся окне проверить корректность отображения суммы (в том числе на кнопке),
         WebElement iframe = driver.findElement(By.xpath("//*[contains(@class, 'bepaid-iframe')]"));
         driver.switchTo().frame(iframe);
-
-        WebElement paymentAmount = driver.findElement(By.xpath("//div[@class='header__payment-amount']/span"));
-        String text = paymentAmount.getText();
-
-        System.out.println("Текст в элементе: " + text);
-        //assertTrue(paymentAmountElement.getText().contains("200"));
+        Thread.sleep(5000); // Знаю что так не рекомендовано делать, но иначе не получалось
+        // и в появившемся окне проверить корректность отображения суммы (в том числе на кнопке),
+        WebElement paymentAmountTitle = driver.findElement(By.xpath("//div[@class='header__payment-amount']/span"));
+        assertTrue(paymentAmountTitle.getText().contains(money + ".00"));
+        WebElement paymentAmountButton = driver.findElement(By.xpath("//button[@class='colored disabled ng-star-inserted']"));
+        assertTrue(paymentAmountButton.getText().contains(money + ".00"));
         // номера телефона,
+
         // а также надписей в незаполненных полях для ввода реквизитов карты,
+        WebElement title1InPage = driver.findElement
+                (By.xpath("//label[@class ='ng-tns-c47-1 ng-star-inserted']"));
+        assertTrue(title1InPage.getText().equals("Номер карты"));
+        WebElement title2InPage = driver.findElement
+                (By.xpath("//label[@class ='ng-tns-c47-4 ng-star-inserted']"));
+        assertTrue(title2InPage.getText().equals("Срок действия"));
+        WebElement title3InPage = driver.findElement
+                (By.xpath("//label[@class ='ng-tns-c47-5 ng-star-inserted']"));
+        assertTrue(title3InPage.getText().equals("CVC"));
+        WebElement title4InPage = driver.findElement
+                (By.xpath("//label[@class ='ng-tns-c47-3 ng-star-inserted']"));
+        assertTrue(title4InPage.getText().equals("Имя держателя (как на карте)"));
         // наличие иконок платёжных систем.
 
 //        WebElement nextElement = driver.findElement(By.xpath("//*[contains(@class, 'app-wrapper__content')]"));
 //        assertTrue(nextElement.isEnabled());
 
     }
-
 }
