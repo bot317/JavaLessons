@@ -99,12 +99,16 @@ public class ChromeTest {
         WebElement iframe = driver.findElement(By.xpath("//*[contains(@class, 'bepaid-iframe')]"));
         driver.switchTo().frame(iframe);
         Thread.sleep(5000); // Знаю что так не рекомендовано делать, но иначе не получалось
+
         // и в появившемся окне проверить корректность отображения суммы (в том числе на кнопке),
         WebElement paymentAmountTitle = driver.findElement(By.xpath("//div[@class='header__payment-amount']/span"));
         assertTrue(paymentAmountTitle.getText().contains(money + ".00"));
         WebElement paymentAmountButton = driver.findElement(By.xpath("//button[@class='colored disabled ng-star-inserted']"));
         assertTrue(paymentAmountButton.getText().contains(money + ".00"));
-        // номера телефона,
+
+        // номера телефона
+        WebElement phoneNumberTitle = driver.findElement(By.xpath("//p[@class='header__payment-info']"));
+        assertTrue(phoneNumberTitle.getText().contains(phoneNumber));
 
         // а также надписей в незаполненных полях для ввода реквизитов карты,
         WebElement title1InPage = driver.findElement
@@ -119,8 +123,8 @@ public class ChromeTest {
         WebElement title4InPage = driver.findElement
                 (By.xpath("//label[@class ='ng-tns-c47-3 ng-star-inserted']"));
         assertTrue(title4InPage.getText().equals("Имя держателя (как на карте)"));
-        // наличие иконок платёжных систем.
 
+        // наличие иконок платёжных систем.
 //        WebElement nextElement = driver.findElement(By.xpath("//*[contains(@class, 'app-wrapper__content')]"));
 //        assertTrue(nextElement.isEnabled());
 
