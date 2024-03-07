@@ -124,9 +124,16 @@ public class ChromeTest {
                 (By.xpath("//label[@class ='ng-tns-c47-3 ng-star-inserted']"));
         assertTrue(title4InPage.getText().equals("Имя держателя (как на карте)"));
 
-        // наличие иконок платёжных систем.
-//        WebElement nextElement = driver.findElement(By.xpath("//*[contains(@class, 'app-wrapper__content')]"));
-//        assertTrue(nextElement.isEnabled());
-
+        // наличие иконок платёжных систем
+        WebElement logoMastercard = driver.findElement(By.xpath("//div[@class='cards-brands ng-tns-c47-1']//img[contains(@src, 'mastercard')]"));
+        assertTrue(logoMastercard.isEnabled());
+        WebElement logoVisa = driver.findElement(By.xpath("//div[@class='cards-brands ng-tns-c47-1']//img[contains(@src, 'visa')]"));
+        assertTrue(logoVisa.isEnabled());
+        WebElement logoBelkart = driver.findElement(By.xpath("//div[@class='cards-brands ng-tns-c47-1']//img[contains(@src, 'belkart')]"));
+        assertTrue(logoBelkart.isEnabled());
+        WebElement logoMir = driver.findElement(By.xpath("//div[@class='cards-brands ng-tns-c47-1']//img[contains(@src, 'mir')]"));
+        assertTrue(logoMir.isEnabled());
+        WebElement logoMaestro = driver.findElement(By.xpath("//div[@class='cards-brands ng-tns-c47-1']//img[contains(@src, 'maestro')]"));
+        assertTrue(logoMaestro.isEnabled());
     }
 }
